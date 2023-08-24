@@ -34,11 +34,33 @@ const redPin = L.icon({
 })
 
 // Metro station markers:
-const rS = L.marker([48.866200610611926, 2.352236247419453], {icon: redPin}).bindPopup('RÃ©aumur-SÃ©bastopol')
-const sSD = L.marker([48.869531786321566, 2.3528590208055196]).bindPopup('Strasbourg-Saint-Denis')
-const sentier = L.marker([48.8673721067762, 2.347107922912739]).bindPopup('Sentier')
-const bourse = L.marker([48.86868503971672, 2.3412285142058167]).bindPopup('Bourse')
-const qS = L.marker([48.869560129483226, 2.3358638645569543]).bindPopup('Quatre Septembre')
-const gB = L.marker([48.871282159004856, 2.3434818588892714]).bindPopup('Grands Boulevards')
+// const rS = L.marker([48.866200610611926, 2.352236247419453], {icon: redPin}).bindPopup('RÃ©aumur-SÃ©bastopol')
+// const sSD = L.marker([48.869531786321566, 2.3528590208055196], {icon: redPin}).bindPopup('Strasbourg-Saint-Denis')
+// const sentier = L.marker([48.8673721067762, 2.347107922912739], {icon: redPin}).bindPopup('Sentier')
+// const bourse = L.marker([48.86868503971672, 2.3412285142058167], {icon: redPin}).bindPopup('Bourse')
+// const qS = L.marker([48.869560129483226, 2.3358638645569543], {icon: redPin}).bindPopup('Quatre Septembre')
+// const gB = L.marker([48.871282159004856, 2.3434818588892714], {icon: redPin}).bindPopup('Grands Boulevards')
 
-const stations = L.layerGroup([rS, sSD, sentier, bourse, qS, gB]).addTo(myMap)
+// const stations = L.layerGroup([rS, sSD, sentier, bourse, qS, gB]).addTo(myMap)
+
+
+// In class challenge from professor.
+function createCustomMarker(lat, lng, popupContent) {
+    return L.marker([lat, lng], { icon: redPin }).bindPopup(popupContent);
+}
+
+const markersData = [
+    { lat: 48.866200610611926, lng: 2.352236247419453, popup: 'Réaumur-Sébastopol' },
+    { lat: 48.869531786321566, lng: 2.3528590208055196, popup: 'Strasbourg-Saint-Denis' },
+    { lat: 48.8673721067762, lng: 2.347107922912739, popup: 'Sentier' },
+    { lat: 48.86868503971672, lng: 2.3412285142058167, popup: 'Bourse' },
+    { lat: 48.869560129483226, lng: 2.3358638645569543, popup: 'Quatre Septembre' },
+    { lat: 48.871282159004856, lng: 2.3434818588892714, popup: 'Grands Boulevards' }
+];
+
+const markers = markersData.map(data =>
+    createCustomMarker(data.lat, data.lng, data.popup)
+);
+
+const stations = L.layerGroup(markers).addTo(myMap);
+
